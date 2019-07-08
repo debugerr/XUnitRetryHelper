@@ -9,8 +9,7 @@ namespace XunitRetryHelper.Tests
         private static int runsA;
         private static int runsB;
 
-        //[RetryTheory]
-        [Theory]
+        [RetryTheory]
         [InlineData(1)]
         [InlineData(2)]
         public void AllPass_Theory(int n)
@@ -18,8 +17,7 @@ namespace XunitRetryHelper.Tests
             Assert.True(n > 0);
         }
 
-        //[RetryTheory]
-        [Theory]
+        [RetryTheory]
         [InlineData(1)]
         [InlineData(2)]
         public void OneFail_Theory(int n)
@@ -27,8 +25,7 @@ namespace XunitRetryHelper.Tests
             Assert.True(n == 2 || runsA++ >= 1);
         }
 
-        //[RetryTheory]
-        [Theory]
+        [RetryTheory]
         [InlineData(1)]
         [InlineData(2)]
         public void TwoFail_Theory(int n)

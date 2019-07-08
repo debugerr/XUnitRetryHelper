@@ -37,19 +37,19 @@
                     }
 
                     var retryDelay = Math.Min(60_000, 5000 * runCount);
-
                     var msg = $"{DateTime.UtcNow.ToString("HH:mm:ss.fff")}, xunit will perform retry number {runCount} in {retryDelay}ms";
-                    var diagMessage = new DiagnosticMessage(msg);
-                    diagnosticMessageSink.OnMessage(diagMessage);
+                    
+                    //var diagMessage = new DiagnosticMessage(msg);
+                    //diagnosticMessageSink.OnMessage(diagMessage);
 
-                    //if (Debugger.IsAttached)
-                    //{
-                    //    Debug.WriteLine(msg);
-                    //}
-                    //else
-                    //{
-                    //    Console.WriteLine(msg);
-                    //}
+                    if (Debugger.IsAttached)
+                    {
+                        Debug.WriteLine(msg);
+                    }
+                    else
+                    {
+                        Console.WriteLine(msg);
+                    }
                     await Task.Delay(retryDelay);
                 }
             }

@@ -16,4 +16,10 @@
     <ProjectReference Include="..\XunitRetryHelper.Lib\XunitRetryHelper.Lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

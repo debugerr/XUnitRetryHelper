@@ -1,6 +1,7 @@
 ﻿namespace XunitRetryHelper.Lib
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.InteropServices.ComTypes;
     using System.Threading;
     using System.Threading.Tasks;
@@ -35,13 +36,21 @@
                         return summary;
                     }
 
-                    var msg = string.Format("Execution failed (attempt #{0}), retrying...", runCount);
-                    var diagMessage = new DiagnosticMessage(msg);
-                    delayedMessageBus.QueueMessage(diagMessage);
-                    diagnosticMessageSink.OnMessage(diagMessage);
-                    Console.WriteLine($"***Retry: {msg}");
+                    var retryDelay = Math.Min(60_000, 5000 * runCount);
 
-                    await Task.Delay(Math.Min(60_000, 5000 * runCount));
+                    var msg = $"{DateTime.UtcNow.ToString("HH:mm:ss.fff")}, xunit will perform retry number {runCount} in {retryDelay}ms";
+                    var diagMessage = new DiagnosticMessage(msg);
+                    diagnosticMessageSink.OnMessage(diagMessage);
+
+                    //if (Debugger.IsAttached)
+                    //{
+                    //    Debug.WriteLine(msg);
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine(msg);
+                    //}
+                    await Task.Delay(retryDelay);
                 }
             }
         }

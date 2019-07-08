@@ -35,7 +35,12 @@
                         return summary;
                     }
 
-                    diagnosticMessageSink.OnMessage(new DiagnosticMessage("Execution failed (attempt #{0}), retrying...", runCount));
+                    var msg = string.Format("Execution failed (attempt #{0}), retrying...", runCount);
+                    var diagMessage = new DiagnosticMessage(msg);
+                    delayedMessageBus.QueueMessage(diagMessage);
+                    diagnosticMessageSink.OnMessage(diagMessage);
+                    Console.WriteLine($"***Retry: {msg}");
+
                     await Task.Delay(Math.Min(60_000, 5000 * runCount));
                 }
             }

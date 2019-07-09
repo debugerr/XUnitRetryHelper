@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Runtime.InteropServices.ComTypes;
     using System.Threading;
     using System.Threading.Tasks;
     using Xunit.Abstractions;
@@ -21,37 +20,48 @@
                                                 IMessageBus messageBus,
                                                 object[] constructorArguments,
                                                 ExceptionAggregator aggregator,
+                                                XunitTestCase testCase,
                                                 CancellationTokenSource cancellationTokenSource)
         {
-            var runCount = 0;
+            var testExecutionCount = 0;
 
             using (var delayedMessageBus = new DelayedMessageBus(messageBus))
             {
                 while (true)
                 {
                     var summary = await executer(diagnosticMessageSink, delayedMessageBus, constructorArguments, aggregator, cancellationTokenSource);
-                    if (aggregator.HasExceptions || summary.Failed == 0 || ++runCount > maxRetries)
+
+                    if (aggregator.HasExceptions || summary.Failed == 0 || ++testExecutionCount > maxRetries)
                     {
                         delayedMessageBus.Complete();
+                        if (summary.Failed == 0 && testExecutionCount > 1)
+                        {
+                            LogMessage($"Test '{testCase.DisplayName}' succeeded after {testExecutionCount} executions.");
+                        }
+
                         return summary;
                     }
 
-                    var retryDelay = Math.Min(60_000, 5000 * runCount);
-                    var msg = $"{DateTime.UtcNow.ToString("HH:mm:ss.fff")}, xunit will perform retry number {runCount} in {retryDelay}ms";
-                    
-                    //var diagMessage = new DiagnosticMessage(msg);
-                    //diagnosticMessageSink.OnMessage(diagMessage);
+                    var retryDelay = Math.Min(60_000, 5000 * testExecutionCount);
+                    var msg = $"performing retry number {testExecutionCount} in {retryDelay}ms for Test '{testCase.DisplayName}'";
+                    LogMessage(msg);
 
-                    if (Debugger.IsAttached)
-                    {
-                        Debug.WriteLine(msg);
-                    }
-                    else
-                    {
-                        Console.WriteLine(msg);
-                    }
-                    await Task.Delay(retryDelay);
+                    await Task.Delay(retryDelay, cancellationTokenSource.Token);
                 }
+            }
+        }
+
+        private static void LogMessage(string msg)
+        {
+            msg = $"{DateTime.UtcNow.ToString("HH:mm:ss.fff")} [Test] {msg}";
+
+            if (Debugger.IsAttached)
+            {
+                Debug.WriteLine(msg);
+            }
+            else
+            {
+                Console.WriteLine(msg);
             }
         }
     }

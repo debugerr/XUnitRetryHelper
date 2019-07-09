@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Package</id>
+    <version>1.0.0</version>
+    <authors>debugerr</authors>
+    <owners>debugerr</owners>
+    <licenseUrl>https://github.com/debugerr/XUnitRetryHelper/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/debugerr/XUnitRetryHelper</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package description</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>xunit</tags>
+    <dependencies>
+      <dependency id="xunit" version="2.4.0" />
+    </dependencies>
+  </metadata>
+</package>

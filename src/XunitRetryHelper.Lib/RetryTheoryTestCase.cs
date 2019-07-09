@@ -35,7 +35,7 @@
                                                 ExceptionAggregator aggregator,
                                                 CancellationTokenSource cancellationTokenSource)
         {
-            return await RetryLogicWrapper.PerformRetry(base.RunAsync, this.maxRetries, diagnosticMessageSink, messageBus, constructorArguments, aggregator, cancellationTokenSource);
+            return await RetryLogicWrapper.PerformRetry(base.RunAsync, this.maxRetries, diagnosticMessageSink, messageBus, constructorArguments, aggregator, this, cancellationTokenSource);
         }
 
         public override void Serialize(IXunitSerializationInfo data)

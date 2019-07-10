@@ -1,13 +1,10 @@
 pool:
   name: Hosted Ubuntu 1604
 
-variables:
-  defaultTestParams: '--configuration $(BuildConfiguration) -p:ParallelizeTestCollections=false --logger trx --results-directory ./TestResults'
-
-steps:
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: '**/*[Tt]ests/*.csproj'
-    arguments: '${{ variables.defaultTestParams }}'
+- job: test-runner
+  displayName: Run tests
+  timeoutInMinutes: 60
+  pool:
+    name: Default
+  steps:
+  - template: azure-pipeline-tests.yaml

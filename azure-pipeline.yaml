@@ -1,3 +1,4 @@
+name: test
 jobs:
 - job: test-runner
   displayName: Run tests

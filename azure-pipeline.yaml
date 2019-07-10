@@ -1,6 +1,6 @@
-pool:
-  name: Hosted Ubuntu 1604
+name: $(Build.SourceBranchName)_$(Build.Reason)_$(majorVersion).$(Build.BuildId)$(Rev:.r)
 
+jobs:
 - job: test-runner
   displayName: Run tests
   timeoutInMinutes: 60

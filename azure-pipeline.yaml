@@ -1,4 +1,8 @@
-name: $(Build.SourceBranchName)_$(Build.Reason)
+name: $(Build.SourceBranchName)_$(Build.Reason)_$(majorVersion).$(Build.BuildId)$(Rev:.r)
+
+variables:
+  majorVersion: 1.0.0
+  buildConfiguration: 'Release'
 
 jobs:
 - job: test-runner

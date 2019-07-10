@@ -1,6 +1,6 @@
 parameters:
   platform: ''  
-  defaultTestParams: '--configuration $(BuildConfiguration) -p:ParallelizeTestCollections=false --logger trx --results-directory ./TestResults'
+  defaultTestParams: '--configuration $(BuildConfiguration) -p:ParallelizeTestCollections=false'
 
 steps:
 - task: DotNetCoreCLI@2

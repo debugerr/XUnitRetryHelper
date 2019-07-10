@@ -1,7 +1,7 @@
 pool:
   name: Hosted Ubuntu 1604
 
-parameters:
+variables:
   defaultTestParams: '--configuration $(BuildConfiguration) -p:ParallelizeTestCollections=false --logger trx --results-directory ./TestResults'
 
 steps:

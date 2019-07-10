@@ -6,6 +6,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
+    condition: eq(variables['AdditionalIntegrationTestArguments'], '')
     command: test
     projects: '**/*[Tt]ests/*.csproj'
     arguments: '${{ parameters.defaultTestParams }}'

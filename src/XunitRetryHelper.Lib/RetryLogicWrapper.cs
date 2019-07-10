@@ -29,6 +29,7 @@
             {
                 while (true)
                 {
+                    // delayedMessageBus.StartRun();
                     var summary = await executer(diagnosticMessageSink, delayedMessageBus, constructorArguments, aggregator, cancellationTokenSource);
 
                     if (aggregator.HasExceptions || summary.Failed == 0 || ++testExecutionCount > maxRetries)

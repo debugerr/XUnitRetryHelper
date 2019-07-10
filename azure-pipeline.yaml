@@ -1,0 +1,13 @@
+pool:
+  name: Hosted Ubuntu 1604
+
+parameters:
+  defaultTestParams: '--configuration $(BuildConfiguration) -p:ParallelizeTestCollections=false --logger trx --results-directory ./TestResults'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '**/*[Tt]ests/*.csproj'
+    arguments: '${{ parameters.defaultTestParams }}'

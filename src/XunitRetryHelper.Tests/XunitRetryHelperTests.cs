@@ -21,7 +21,7 @@ namespace XunitRetryHelper.Tests
         [InlineData(2)]
         public void OneFail_Theory(int n)
         {
-            Assert.True(n == 2 || runsA++ >= 1);
+            Assert.True(n == 2 || runsA++ >= 5);
         }
 
         [RetryTheory]

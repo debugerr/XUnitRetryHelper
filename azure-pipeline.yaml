@@ -9,6 +9,6 @@ jobs:
   displayName: Run tests
   timeoutInMinutes: 60
   pool:
-    name: Default
+    vmImage: 'Ubuntu 16.04'
   steps:
   - template: azure-pipeline-tests.yaml

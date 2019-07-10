@@ -6,7 +6,7 @@ parameters:
 steps:
 - task: DotNetCoreCLI@2
   displayName: Test
-  condition: '${{ parameters.conditionNoArguments }}'
+  condition: ${{ parameters.conditionNoArguments }}
   inputs:
     command: test
     projects: '**/*[Tt]ests/*.csproj'

@@ -1,12 +1,13 @@
 parameters:
   platform: ''  
   defaultTestParams: '--configuration $(BuildConfiguration) -p:ParallelizeTestCollections=false'
+  conditionNoArguments: eq(variables['AdditionalIntegrationTestArguments'], '')
 
 steps:
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
-    condition: eq(variables['AdditionalIntegrationTestArguments'], '')
+    condition: '${{ parameters.conditionNoArguments }}'
     command: test
     projects: '**/*[Tt]ests/*.csproj'
     arguments: '${{ parameters.defaultTestParams }}'

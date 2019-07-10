@@ -3,7 +3,6 @@ name: $(Build.SourceBranchName)_$(Build.Reason)_$(majorVersion).$(Build.BuildId)
 variables:
   majorVersion: 1.0.0
   buildConfiguration: 'Release'
-  AdditionalIntegrationTestArguments: 'ddd'
 
 jobs:
 - job: test_runner

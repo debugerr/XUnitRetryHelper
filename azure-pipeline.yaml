@@ -5,7 +5,7 @@ variables:
   buildConfiguration: 'Release'
 
 jobs:
-- job: test-runner
+- job: test_runner
   displayName: Run tests
   timeoutInMinutes: 60
   pool:

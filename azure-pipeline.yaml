@@ -14,4 +14,4 @@ jobs:
   steps:
   - template: azure-pipeline-tests.yaml
     parameters:
-      testsToRun: ${{variables['IntegrationTestsToRun']}}
+      testsToRun: $(variables['IntegrationTestsToRun'])

@@ -2,7 +2,9 @@ parameters:
   platform: ''  
   defaultTestParams: '--configuration $(BuildConfiguration) -p:ParallelizeTestCollections=false'
   conditionNoArguments: eq(variables['AdditionalIntegrationTestArguments'], '')
-  testsToRun: ['Test1', 'Test2']
+  testsToRun: 
+  - Test1
+  - Test2
 
 steps:
 - ${{ each test in parameters.testsToRun }}:

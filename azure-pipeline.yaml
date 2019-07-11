@@ -3,9 +3,6 @@ name: $(Build.SourceBranchName)_$(Build.Reason)_$(majorVersion).$(Build.BuildId)
 variables:
   majorVersion: 1.0.0
   buildConfiguration: 'Release'
-  IntegrationTestsToRun:
-  - 'Test4'
-  - 'Test5'
 
 jobs:
 - job: test_runner
@@ -15,5 +12,3 @@ jobs:
     vmImage: 'Ubuntu 16.04'
   steps:
   - template: azure-pipeline-tests.yaml
-    parameters:
-      testsToRun: $(IntegrationTestsToRun)

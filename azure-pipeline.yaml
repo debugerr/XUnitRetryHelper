@@ -4,8 +4,8 @@ variables:
   majorVersion: 1.0.0
   buildConfiguration: 'Release'
   IntegrationTestsToRun:
-    - 'Test4'
-    - 'Test5'
+  - 'Test4'
+  - 'Test5'
 
 jobs:
 - job: test_runner
